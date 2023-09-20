@@ -1,9 +1,9 @@
-import { runSynchronizeItemsLoop } from "./lib/dataSynchronization/runSynchronizeItemsLoop";
-import { runSynchronizeSalesLoop } from "./lib/dataSynchronization/runSynchronizeSalesLoop";
+import { synchronizeItemsLoop } from "./lib/dataSynchronization/synchronizeItemsLoop";
+import { synchronizeSalesLoop } from "./lib/dataSynchronization/synchronizeSalesLoop";
 
 export default async function script() {
   // Start both functions concurrently
-  await Promise.all([runSynchronizeItemsLoop(), runSynchronizeSalesLoop()]);
+  await Promise.all([synchronizeItemsLoop(), synchronizeSalesLoop()]);
 }
 
 script().catch((error) => {

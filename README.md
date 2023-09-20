@@ -7,7 +7,7 @@ To initialize a new DB you need to :
 
 Run npx ts-node lib/seedDatabase/seed.ts
 
-The three legacy Tables for Players, NFTs, Drops.
+Our three legacy Tables for Players, NFTs, Drops.
 Import them through pgAdmin in that order with these fields : 
 1_ Player : name, spent, sold, balance 
 2_ NFT : composedId, issuedId, ownerName, archetypeId 
@@ -21,8 +21,7 @@ Other scripts:
 Allows to Update just one specific item's sales : 
 npx ts-node lib/dataSynchronization/refreshSpecificItemSales.ts BT0_Blast_2H_Hammer
 
-Refresh Item's List and FloorPrices : 
-npm run script1
+To build js from ts if needed ? (runs tsc) 
+npm run build
 
-Refresh Sales for all Items :
-npm run script2
+To run the app : (runs node script.js)

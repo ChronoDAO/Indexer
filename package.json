@@ -2,13 +2,11 @@
   "name": "openlootdata",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node script.js",
-    "build": "tsc",
-    "itemsLoop": "npx ts-node lib/dataSynchronization/runSynchronizeItemsLoop.ts",
-    "salesLoop": "npx ts-node lib/dataSynchronization/runSynchronizeSalesLoop.ts"
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",

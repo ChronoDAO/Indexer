@@ -9,12 +9,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const runSynchronizeItemsLoop_1 = require("./lib/dataSynchronization/runSynchronizeItemsLoop");
-const runSynchronizeSalesLoop_1 = require("./lib/dataSynchronization/runSynchronizeSalesLoop");
+const synchronizeItemsLoop_1 = require("./lib/dataSynchronization/synchronizeItemsLoop");
+const synchronizeSalesLoop_1 = require("./lib/dataSynchronization/synchronizeSalesLoop");
 function script() {
     return __awaiter(this, void 0, void 0, function* () {
         // Start both functions concurrently
-        yield Promise.all([(0, runSynchronizeItemsLoop_1.runSynchronizeItemsLoop)(), (0, runSynchronizeSalesLoop_1.runSynchronizeSalesLoop)()]);
+        yield Promise.all([(0, synchronizeItemsLoop_1.synchronizeItemsLoop)(), (0, synchronizeSalesLoop_1.synchronizeSalesLoop)()]);
     });
 }
 exports.default = script;

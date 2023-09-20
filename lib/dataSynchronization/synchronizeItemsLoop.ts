@@ -1,7 +1,7 @@
 import { synchronizeItems } from "./synchronizeItems";
 import { delay } from "./delay";
 
-export async function runSynchronizeItemsLoop() {
+export async function synchronizeItemsLoop() {
 
  while (true) {
   console.log("script synchronizeItems started")
