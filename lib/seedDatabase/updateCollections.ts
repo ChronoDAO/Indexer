@@ -18,12 +18,12 @@ export async function seedCollections() {
           data: collection,
         });
         console.log(`Added collection: ${collection.name}`);
-      } else {
-        console.log(`collection ${collection.name} already exists, skipping.`);
       }
     } catch (error: any) {
       console.error(`Error adding collection ${collection.name}: ${error.message}`);
     }
+    console.log('Collections Updated to match const in seedDatabase')
+    
   }
 }
 

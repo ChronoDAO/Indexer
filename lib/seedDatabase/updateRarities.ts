@@ -31,6 +31,5 @@ export async function seedRarities() {
       console.error(`Error adding rarity ${rarity.name}: ${error.message}`);
     }
   }
+  console.log("Rarities Updated to match const in seedDatabase");
 }
-
-

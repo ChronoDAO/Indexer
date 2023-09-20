@@ -1,6 +1,5 @@
-//Errors due to new DataTable Guild not migrated yet
 import prisma from "../prismaRequests/prisma";
-// ADD guilds here and run this to add it to the DB.
+// ADD,UPDATE,REMOVE guilds from here and run this to update guilds in the DB.
 const guilds = [
   {
     name: "ChronoDAO",
@@ -85,7 +84,7 @@ export async function seedGuilds() {
     const existingGuilds = await prisma.guild.findMany();
 
     // Create a map for efficient look-up
-    const existingGuildsMap:any = {};
+    const existingGuildsMap: any = {};
     for (const existingGuild of existingGuilds) {
       existingGuildsMap[existingGuild.name] = existingGuild;
     }
@@ -102,7 +101,10 @@ export async function seedGuilds() {
         console.log(`Added guild: ${guild.name}`);
       } else {
         // Guild exists, update tag and discordUrl if they are different
-        if (existingGuild.tag !== guild.tag || existingGuild.discordUrl !== guild.discordUrl) {
+        if (
+          existingGuild.tag !== guild.tag ||
+          existingGuild.discordUrl !== guild.discordUrl
+        ) {
           await prisma.guild.update({
             where: {
               name: guild.name,
@@ -113,8 +115,6 @@ export async function seedGuilds() {
             },
           });
           console.log(`Updated guild: ${guild.name}`);
-        } else {
-          console.log(`Guild ${guild.name} already exists, skipping.`);
         }
 
         // Remove the guild from the map to mark it as "handled"
@@ -133,5 +133,7 @@ export async function seedGuilds() {
     }
   } catch (error: any) {
     console.error(`Error adding/updating/deleting guilds: ${error.message}`);
+  } finally {
+    console.log('Guilds Updated to match const in seedDatabase')
   }
 }

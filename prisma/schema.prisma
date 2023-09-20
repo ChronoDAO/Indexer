@@ -99,7 +99,7 @@ model Drop {
 model Guild {
   id             Int    @id @default(autoincrement())
   name           String @unique
-  discordUrl     String? @unique
+  discordUrl     String? 
   tag            String?
   members        Player[] @relation("memberOfGuild")
   discordGuild   DiscordGuild?
