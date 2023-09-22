@@ -4,7 +4,7 @@ import refreshSalesTable from "./refreshSalesTable";
 const fetch = require("fetch-retry")(global.fetch);
 
 export async function synchronizeSales() {
-  //Second Part :
+
   const startTime = new Date();
   let items = await prisma.item.findMany({
     orderBy: {
