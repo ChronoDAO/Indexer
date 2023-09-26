@@ -12,27 +12,27 @@ datasource db {
 }
 
 model Player {
-  id        Int    @id @default(autoincrement())
-  name      String @unique
+  id        Int     @id @default(autoincrement())
+  name      String  @unique
   nfts      NFT[]
-  sales     Sale[] @relation("fromPlayer")
-  purchases Sale[] @relation("toPlayer")
-  drops     Drop[] @relation("toPlayer")
-  spent     Float  @default(0)
-  sold      Float  @default(0)
-  balance   Float  @default(0)
+  sales     Sale[]  @relation("fromPlayer")
+  purchases Sale[]  @relation("toPlayer")
+  drops     Drop[]  @relation("toPlayer")
+  spent     Float   @default(0)
+  sold      Float   @default(0)
+  balance   Float   @default(0)
   //New relations
   username  User[]
-  guilds    Guild[]    @relation("memberOfGuild")
+  guilds    Guild[] @relation("memberOfGuild")
 }
 
 model NFT {
-  id          Int       @id @default(autoincrement())
-  composedId  String    @unique
+  id          Int     @id @default(autoincrement())
+  composedId  String  @unique
   issuedId    Int
-  owner       Player?   @relation(fields: [ownerName], references: [name])
+  owner       Player? @relation(fields: [ownerName], references: [name])
   ownerName   String?
-  item        Item?     @relation(fields: [archetypeId], references: [archetypeId])
+  item        Item?   @relation(fields: [archetypeId], references: [archetypeId])
   archetypeId String?
   sales       Sale[]
   drops       Drop[]
@@ -97,32 +97,32 @@ model Drop {
 
 //New models
 model Guild {
-  id             Int    @id @default(autoincrement())
-  name           String @unique
-  discordUrl     String? 
-  tag            String?
-  members        Player[] @relation("memberOfGuild")
-  discordGuild   DiscordGuild?
+  id           Int           @id @default(autoincrement())
+  name         String        @unique
+  discordUrl   String?
+  tag          String?
+  members      Player[]      @relation("memberOfGuild")
+  discordGuild DiscordGuild?
 }
 
 model User {
-  id               String      @id @default(cuid())
-  name             String?
-  email            String?     @unique
-  emailVerified    DateTime?   @map("email_verified")
-  image            String?
-  discriminator    String?
-  global_name      String?    
-  verified         Boolean?    @default(false)
-  mfa_enabled      Boolean?    @default(false)
-  banner           String?
-  createdAt        DateTime    @default(now())
-  updatedAt        DateTime    @updatedAt
-  accounts         Account[]
-  sessions         Session[]
-  player           Player?     @relation (fields:[playerName], references: [name])
-  playerName       String?     @unique
-  discordGuild     DiscordGuild[]
+  id            String         @id @default(cuid())
+  name          String?
+  email         String?        @unique
+  emailVerified DateTime?      @map("email_verified")
+  image         String?
+  discriminator String?
+  global_name   String?
+  verified      Boolean?       @default(false)
+  mfa_enabled   Boolean?       @default(false)
+  banner        String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  accounts      Account[]
+  sessions      Session[]
+  player        Player?        @relation(fields: [playerName], references: [name])
+  playerName    String?        @unique
+  discordGuild  DiscordGuild[]
 
   @@map("users")
 }
@@ -148,43 +148,42 @@ model Account {
 }
 
 model Session {
-  id            String   @id @default(cuid())
-  userId        String?  @map("user_id")
-  sessionToken  String   @unique @map("session_token") @db.Text
-  accessToken   String?  @map("access_token") @db.Text
-  expires       DateTime
-  user          User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id           String   @id @default(cuid())
+  userId       String?  @map("user_id")
+  sessionToken String   @unique @map("session_token") @db.Text
+  accessToken  String?  @map("access_token") @db.Text
+  expires      DateTime
+  user         User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   @@map("sessions")
 }
 
 model VerificationRequest {
-  id             String   @id @default(cuid())
-  identifier     String
-  token          String   @unique
-  expires        DateTime
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id         String   @id @default(cuid())
+  identifier String
+  token      String   @unique
+  expires    DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   @@unique([identifier, token])
 }
 
-model DiscordGuild{
-  id                              Int   @id @default(autoincrement())
-  discordGuildId                  String   @unique
-  discordGuildName                String   @unique
-  guildName                       String?  @unique
-  icon                            String?
-  ownerId                         String?
-  approximate_number_count        Int?
-  approximate_presence_count      Int?
-  description                     String?
-  createdAt                       DateTime @default(now())
-  updatedAt                       DateTime @updatedAt
-  user                            User[]
-  guild                           Guild? @relation( fields: [guildName], references: [name])
+model DiscordGuild {
+  id                         String   @id @unique
+  name                       String   @unique
+  guildName                  String?  @unique
+  icon                       String?
+  ownerId                    String?
+  approximate_number_count   Int?
+  approximate_presence_count Int?
+  description                String?
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
+  user                       User[]
+  guild                      Guild?   @relation(fields: [guildName], references: [name])
 
   @@map("discord_guilds")
 }
