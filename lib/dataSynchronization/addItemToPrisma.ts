@@ -26,7 +26,7 @@ export async function addItemToPrisma(item: any) {
 
     const tags = item.metadata.tags || [];
 
-    // Create an array to store the created or connected tags
+    // Create an array to store the created or to be connected tags
     const tagConnections: { name: string }[] = [];
 
     // Loop through the tags
@@ -37,7 +37,7 @@ export async function addItemToPrisma(item: any) {
           name: tag,
         },
       });
-
+      
       // If the tag exists, connect to it
       if (existingTag) {
         tagConnections.push({ name: existingTag.name });

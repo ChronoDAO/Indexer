@@ -57,6 +57,9 @@ model Item {
   lastApiPull    DateTime?
   lastSync       DateTime?
   synced         Boolean
+  set            Set?        @relation(fields: [setName], references: [name])
+  setName        String?
+  categories     Category[]
 }
 
 model Tag {
@@ -71,6 +74,16 @@ model Rarity {
 
 model Collection {
   name  String @unique
+  items Item[]
+}
+
+model Category {
+  name  String @id @unique
+  items Item[]
+}
+
+model Set {
+  name  String @id @unique
   items Item[]
 }
 
