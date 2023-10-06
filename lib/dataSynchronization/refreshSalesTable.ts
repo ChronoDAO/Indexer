@@ -97,46 +97,12 @@ export default async function refreshSalesTable(archetypeId: string) {
       const nbWholePages = nbNewTransactions / 1000.0;
 
       for (i = 2; i < nbWholePages; i++) {
-        // let PartialHistoryResponse = await fetch(
-        //   `https://openloot.com/api/v2/market/items/transaction/history?archetypeId=${archetypeId}&page=${i}&pageSize=${pageMaxSize}`,
-        //   {
-        //     retryOn: [0],
-        //     retries: 50,
-
-        //     retryDelay: function (attempt: any, error: any, response: any) {
-        //       let nextIntent;
-        //       if (attempt < 6) nextIntent = 30 * 1000;
-        //       else nextIntent = Math.pow(2, attempt) * 1000; // 1000, 2000, 4000
-        //       console.log(
-        //         `${archetypeId} retry in ${nextIntent / 1000} seconds`
-        //       );
-        //       return nextIntent;
-        //     },
-        //   }
-        // );
-        // let newResponse: any = await PartialHistoryResponse.json();
+        
         let newResponse:any = await fetchSales(archetypeId,i);
         olItem.items = olItem.items.concat(newResponse.items);
       }
       // Now the final loop with <1000 newSales
-      // let PartialHistoryResponse = await fetch(
-      //   `https://openloot.com/api/v2/market/items/transaction/history?archetypeId=${archetypeId}&page=${Math.ceil(
-      //     nbWholePages
-      //   )}&pageSize=${pageMaxSize}`,
-      //   {
-      //     retryOn: [0],
-      //     retries: 50,
-
-      //     retryDelay: function (attempt: any, error: any, response: any) {
-      //       let nextIntent;
-      //       if (attempt < 6) nextIntent = 30 * 1000;
-      //       else nextIntent = Math.pow(2, attempt) * 1000; // 1000, 2000, 4000
-      //       console.log(`${archetypeId} retry in ${nextIntent / 1000} seconds`);
-      //       return nextIntent;
-      //     },
-      //   }
-      // );
-      // let newResponse: any = await PartialHistoryResponse.json();
+      
       let newResponse:any = fetchSales(archetypeId,Math.ceil(
         nbWholePages
       ))
