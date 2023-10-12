@@ -12,7 +12,7 @@ export async function refreshItemsTable(olTotalItems:any) {
   
   for (let page = 1; page <= Math.ceil(olTotalItems / pageMaxSize); page++) {
     const olItemsList = await fetch(
-      `https://openloot.com/api/v2/market/listings?gameId=56a149cf-f146-487a-8a1c-58dc9ff3a15c&page=${page}&pageSize=${pageMaxSize}`,
+      `https://api.openloot.com/v2/market/listings?gameId=56a149cf-f146-487a-8a1c-58dc9ff3a15c&page=${page}&pageSize=${pageMaxSize}`,
       {
         retryOn: async function (attempt: any, error: any, response: any) {
       

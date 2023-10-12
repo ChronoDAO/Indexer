@@ -5,7 +5,7 @@ export default async function fetchSales(archetypeId: string, page: number) {
   const pageMaxSize = 1000;
   let olItem: any;
   let olItemHistoryResponse = await fetch(
-    `https://openloot.com/api/v2/market/items/transaction/history?archetypeId=${archetypeId}&page=${page}&pageSize=${pageMaxSize}`,
+    `https://api.openloot.com/v2/market/items/transaction/history?archetypeId=${archetypeId}&page=${page}&pageSize=${pageMaxSize}`,
     {
       retryOn: async function (attempt: any, error: any, response: any) {
         // Check if there was an error during the HTTP request
