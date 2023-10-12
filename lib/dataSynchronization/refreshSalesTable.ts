@@ -51,7 +51,7 @@ export default async function refreshSalesTable(archetypeId: string) {
       success = true;
       break;
 
-    case nbNewTransactions < 1000:
+    case nbNewTransactions <= 1000:
       console.log(
         `${archetypeId}  ${nbNewTransactions} new sales detected, updating our DB `
       );
@@ -68,7 +68,7 @@ export default async function refreshSalesTable(archetypeId: string) {
         }
         if (success == false) {
           console.log(
-            `${newSale.archetypeId} failed to update a sale, skipping this item, to preserve accuracy.`
+            `Failed to update a sale, skipping this item, to preserve accuracy.`
           );
           break;
         } else {

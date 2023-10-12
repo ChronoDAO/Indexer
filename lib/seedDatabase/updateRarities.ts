@@ -8,6 +8,9 @@ const rarities = [
   { name: "legendary" },
   { name: "mythic" },
   { name: "exalted" },
+  { name: "exotic" },
+  { name: "transcendent" },
+  { name: "unique"}
 ];
 
 export async function seedRarities() {

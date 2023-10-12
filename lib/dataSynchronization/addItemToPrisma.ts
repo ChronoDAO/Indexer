@@ -1,7 +1,8 @@
 import prisma from "../prismaRequests/prisma";
 
 export async function addItemToPrisma(item: any) {
-  try {
+  if (item.metadata.name !== "" ) {
+    try {
     const data = {
       archetypeId: item.metadata.archetypeId,
       name: item.metadata.name,
@@ -12,7 +13,7 @@ export async function addItemToPrisma(item: any) {
       optionName: item.metadata.optionName,
       rarity: {
         connect: {
-          name: item.metadata.rarity,
+          name: item.metadata.rarity.toLowerCase(),
         },
       },
       collection: {
@@ -75,4 +76,8 @@ export async function addItemToPrisma(item: any) {
       `Error adding ${item.metadata.name} to Prisma: ${error.message}`
     );
   }
+}
+else {
+  console.log(`Skipping ${item.metadata.archetypeId}, name value is "".`)
+}
 }
